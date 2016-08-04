@@ -1,0 +1,88 @@
+/*
+ * In order to use ml-gradle, it must be applied. This occurs after the two above blocks for overriding properties so
+ * that those blocks can override properties before ml-gradle initializes itself.
+ */
+plugins {
+  id "com.marklogic.ml-gradle" version "2.2.0"
+
+  // The following plugins are optional
+
+  // The Java plugin is used to compile and run JUnit tests
+  id "java"
+
+  // These plugins are used to generate IDE files
+  id "eclipse"
+  id "idea"
+}
+
+
+/*
+ * Everything below this line is optional and is intended to show different features provided by ml-gradle.
+ */
+
+/*
+ * This lists the repositories for finding project dependencies (which differ from buildscript dependencies - buildscript
+ * dependencies are not included in project artifacts that are built). These repositories are needed to satisfy the
+ * dependencies expressed below.
+ */
+repositories {
+    jcenter()
+    maven {url "http://developer.marklogic.com/maven2/"}
+}
+
+
+configurations {
+    // This custom Gradle configuration allows us to specify the classpath for running Corb jobs. This is only needed if
+    // you want to run Corb jobs via Gradle tasks. More info on Corb can be found at - http://developer.marklogic.com/code/corb.
+    corb
+    mlcp
+}
+
+
+/*
+ * This expresses dependencies on the ml-java and ml-junit libraries. The former is typically used for application
+ * code, and the latter supports writing JUnit-based tests. A dependency exists on RestAssured to show an option for
+ * using that library in tests that must invoke MarkLogic HTTP endpoints.
+ */
+dependencies {
+    // Needed to compile and run the JUnit tests
+    testCompile "com.marklogic:ml-junit:2.6.0"
+    testCompile "com.jayway.restassured:rest-assured:2.4.1"
+
+    // corb jar available from jcenter
+    corb "com.marklogic:marklogic-corb:2.3.0"
+
+    mlcp "com.marklogic:mlcp:8.0-5"
+}
+
+
+/*
+ * ml-gradle adds an instance of com.marklogic.appdeployer.AppConfig to the Gradle project under the key "mlAppConfig".
+ * This instance can be modified to affect the behavior of ml-gradle.
+ */
+ext {
+    // mlAppConfig is an instance of com.marklogic.appdeployer.AppConfig
+    mlAppConfig {
+        // XCC URL for running corb task below and for creating triggers on pre-8.0-4 builds of MarkLogic
+        contentXccUrl = "xcc://${mlRestAdminUsername}:${mlRestAdminPassword}@${mlHost}:${mlRestPort}"
+    }
+}
+
+
+/*
+ * For tests that reference test files in the test source tree, we need to tell Gradle to copy these to src/test/resources
+ * so that they can be found when running "gradle test".
+ */
+sourceSets.test.resources.srcDir 'src/test/java'
+
+
+task importCve(type: com.marklogic.gradle.task.MlcpTask) {
+    classpath = configurations.mlcp
+    command = "IMPORT"
+    database = mlAppConfig.contentDatabaseName
+    port = mlRestPort.toInteger()
+    input_file_path = "src/main/resources/cyber-ontology/"
+    input_file_type = "rdf"
+    output_collections = "cve"
+    output_permissions = "rest-reader,read,rest-writer,update"
+}
