@@ -53,6 +53,7 @@ dependencies {
     corb "com.marklogic:marklogic-corb:2.3.0"
 
     mlcp "com.marklogic:mlcp:8.0-5"
+    mlcp fileTree(include: ['*.properties'], dir: 'conf')
 }
 
 
@@ -76,13 +77,13 @@ ext {
 sourceSets.test.resources.srcDir 'src/test/java'
 
 
-task importCve(type: com.marklogic.gradle.task.MlcpTask) {
+task importOntologies(type: com.marklogic.gradle.task.MlcpTask) {
     classpath = configurations.mlcp
     command = "IMPORT"
     database = mlAppConfig.contentDatabaseName
     port = mlRestPort.toInteger()
     input_file_path = "src/main/resources/cyber-ontology/"
     input_file_type = "rdf"
-    output_collections = "cve"
+    output_collections = "ontology"
     output_permissions = "rest-reader,read,rest-writer,update"
 }

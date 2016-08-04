@@ -1,0 +1,86 @@
+<export><workspace name="ml-cyber"><query name="OWL Classes" focus="false" listorder="1" taborder="1" active="true" database="4445014357708545043" server="12540901997389234467" mode="sparql">PREFIX owl: &lt;http://www.w3.org/2002/07/owl&gt;
+PREFIX ml: &lt;http://marklogic.com/semantics/blank/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX nist: &lt;http://nvd.nist.gov/cve#&gt;
+PREFIX edt: &lt;http://www.daedafusion.com/editor_annotation#&gt;
+PREFIX cwe: &lt;http://cwe.mitre.org/cwe#&gt;
+PREFIX cpe: &lt;http://cpe.mitre.org/cpe#&gt;
+
+SELECT *
+WHERE {
+    ?subj rdfs:type owl:Class .
+}
+</query><query name="vulnerability domain values" focus="false" listorder="2" taborder="2" active="true" database="4445014357708545043" server="12540901997389234467" mode="sparql">PREFIX owl: &lt;http://www.w3.org/2002/07/owl&gt;
+PREFIX ml: &lt;http://marklogic.com/semantics/blank/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX nist: &lt;http://nvd.nist.gov/cve#&gt;
+PREFIX edt: &lt;http://www.daedafusion.com/editor_annotation#&gt;
+PREFIX cwe: &lt;http://cwe.mitre.org/cwe#&gt;
+PREFIX cpe: &lt;http://cpe.mitre.org/cpe#&gt;
+
+SELECT ?s
+WHERE {
+  ?s rdfs:domain nist:Vulnerability .
+}</query><query name="vulnerability range" focus="false" listorder="3" taborder="3" active="true" database="4445014357708545043" server="12540901997389234467" mode="sparql">PREFIX owl: &lt;http://www.w3.org/2002/07/owl&gt;
+PREFIX ml: &lt;http://marklogic.com/semantics/blank/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX nist: &lt;http://nvd.nist.gov/cve#&gt;
+PREFIX edt: &lt;http://www.daedafusion.com/editor_annotation#&gt;
+PREFIX cwe: &lt;http://cwe.mitre.org/cwe#&gt;
+PREFIX cpe: &lt;http://cpe.mitre.org/cpe#&gt;
+
+SELECT ?s
+WHERE {
+  ?s rdfs:range nist:Vulnerability .
+}</query><query name="Insert Weakness" focus="false" listorder="4" taborder="4" active="true" database="4445014357708545043" server="12540901997389234467" mode="sparql-update">PREFIX owl: &lt;http://www.w3.org/2002/07/owl&gt;
+PREFIX ml: &lt;http://marklogic.com/semantics/blank/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX nist: &lt;http://nvd.nist.gov/cve#&gt;
+PREFIX edt: &lt;http://www.daedafusion.com/editor_annotation#&gt;
+PREFIX cwe: &lt;http://cwe.mitre.org/cwe#&gt;
+PREFIX cpe: &lt;http://cpe.mitre.org/cpe#&gt;
+
+INSERT DATA
+{
+  &lt;http://cwe.mitre.org/cwe#56283&gt; 
+    rdf:type cwe:Weakness;
+    cwe:id 56283; 
+    cwe:introText "Linux Kernel TCP Sequence Number Generation Security Weakness"
+    cwe:OperatingSystem "Linux"
+    cwe:descriptionSummary "The Linux kernel is prone to a security weakness related to TCP sequence number generation. Attackers can exploit this issue to inject arbitrary packets into TCP sessions using a brute force attack. ".         
+}</query><query name="Weakness properties" focus="false" listorder="5" taborder="" active="false" database="4445014357708545043" server="12540901997389234467" mode="sparql">PREFIX owl: &lt;http://www.w3.org/2002/07/owl&gt;
+PREFIX ml: &lt;http://marklogic.com/semantics/blank/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX nist: &lt;http://nvd.nist.gov/cve#&gt;
+PREFIX edt: &lt;http://www.daedafusion.com/editor_annotation#&gt;
+PREFIX cwe: &lt;http://cwe.mitre.org/cwe#&gt;
+PREFIX cpe: &lt;http://cpe.mitre.org/cpe#&gt;
+
+SELECT *
+WHERE {
+  cwe:Weakness ?p ?o .
+}</query><query name="View Weakness data" focus="true" listorder="6" taborder="5" active="true" database="4445014357708545043" server="12540901997389234467" mode="sparql">PREFIX owl: &lt;http://www.w3.org/2002/07/owl&gt;
+PREFIX ml: &lt;http://marklogic.com/semantics/blank/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX nist: &lt;http://nvd.nist.gov/cve#&gt;
+PREFIX edt: &lt;http://www.daedafusion.com/editor_annotation#&gt;
+PREFIX cwe: &lt;http://cwe.mitre.org/cwe#&gt;
+PREFIX cpe: &lt;http://cpe.mitre.org/cpe#&gt;
+
+SELECT *
+WHERE {
+  ?s rdf:type cwe:Weakness .
+  ?s ?p ?o .
+}</query></workspace></export>
